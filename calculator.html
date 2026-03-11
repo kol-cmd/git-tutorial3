@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="num-btn" value="0">0</button>
+    <button class="num-btn" value="1">1</button>
+    <button class="num-btn" value="2">2</button>
+    <button class="num-btn" value="3">3</button>
+    <button class="num-btn" value="4">4</button>
+    <p></p>
+    <button class="num-btn" value="5">5</button>
+    <button class="num-btn" value="6">6</button>
+    <button class="num-btn" value="7">7</button>
+    <button class="num-btn" value="8">8</button>
+    <button class="num-btn" value="9">9</button>
+    <p></p>
+    <button class="sign-btn" value="+">+</button>
+    <button class="sign-btn" value="-">-</button>
+    <button class="sign-btn" value="/">/</button>
+    <button class="sign-btn" value="*">*</button>
+    <button id="equal-btn">=</button>
+    <button id="clear">clear</button>
+    <div id="text-box"></div>
+  </body>
+  <script>
+    let firstNumber = "";
+    let secondNumber = "";
+    let selectedSign = "";
+  
+    let isSigned = false;
+    let textBox = document.getElementById("text-box");
+    let numBtn = document.querySelectorAll(".num-btn");
+
+    numBtn.forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        let selectedNumber = event.target.value;
+        if (isSigned === false) {
+          firstNumber = firstNumber + selectedNumber;
+          textBox.innerText = firstNumber;
+        } else {
+          secondNumber = secondNumber + selectedNumber;
+          textBox.innerText = secondNumber;
+        }
+      });
+    });
+
+    let signButton = document.querySelectorAll(".sign-btn");
+    signButton.forEach(function (sign) {
+      sign.addEventListener("click", function (event) {
+        isSigned = true;
+        selectedSign = event.target.value;
+        textBox.innerText = selectedSign;
+      });
+    });
+
+    let equalButton = document.getElementById("equal-btn");
+    equalButton.addEventListener("click", function () {
+     let num1 = parseInt(firstNumber);
+        let num2 = parseInt(secondNumber);
+      if (selectedSign === "+") {
+       
+        firstNumber= num1 + num2;
+        secondNumber = "";
+      } else if (selectedSign === "-") {
+      
+       firstNumber= num1 - num2;
+        secondNumber = "";
+
+      } else if (selectedSign === "/") {
+       
+      firstNumber= num1 / num2;
+        secondNumber = "";
+
+      } else if (selectedSign === "*") {
+     
+       firstNumber= num1 * num2;
+        secondNumber = "";
+
+      }
+  textBox.innerHTML= firstNumber;
+    });
+    const clear= document.getElementById('clear');
+    clear.addEventListener('click', function(){
+        firstNumber = "";
+   secondNumber = "";
+   selectedSign = "";
+    firstNumber = "";
+     isSigned = false;
+     textBox.innerText= "";
+    })
+  </script>
+</html>
