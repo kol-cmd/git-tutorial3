@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Real-Time Search Filter</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; justify-content: center; padding: 50px; }
+    .search-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 300px; }
+    
+    #search-input { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    
+    .item { padding: 10px; border-bottom: 1px solid #eee; transition: 0.2s; }
+    .item:last-child { border-bottom: none; }
+
+    /* THE HIDE CLASS */
+    .hide { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="search-container">
+  <h2>Language Finder</h2>
+  <input type="text" id="search-input" placeholder="Search languages...">
+  
+  <div id="item-list">
+    <div class="item">JavaScript</div>
+    <div class="item">Python</div>
+    <div class="item">PHP</div>
+    <div class="item">HTML</div>
+    <div class="item">CSS</div>
+    <div class="item">Java</div>
+    <div class="item">Ruby</div>
+  </div>
+</div>
+
+<script>
+ const searchInput= document.getElementById('search-input');
+ const list = document.getElementById('item-list');
+ const item = document.querySelectorAll('.item');
+
+ searchInput.addEventListener('input', function(){
+  let filter = searchInput.value.toLowerCase();
+  
+item.forEach(function(item){
+  let text = item.innerText.toLowerCase();
+
+  if (text.includes(filter)){
+    item.classList.remove('hide');
+  }else if(!text.includes(filter)){
+item.classList.add('hide');
+  }
+})
+ })
+
+</script>
+
+</body>
+</html>

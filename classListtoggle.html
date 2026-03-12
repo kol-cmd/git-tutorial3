@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Movie Watchlist</title>
+    <style>
+      /* Dark theme styling */
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #141414;
+        color: white;
+      }
+      .app-container {
+        max-width: 450px;
+        margin: auto;
+        background: #222;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .inputs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 10px;
+        width: 70%;
+        border: none;
+        border-radius: 4px;
+      }
+      #add-btn {
+        background: #e50914;
+        color: white;
+        width: 30%;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      .movie-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #333;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        transition: 0.3s; /* Makes the color change smooth */
+      }
+
+      .btn-group button {
+        margin-left: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 3px;
+        color: white;
+        font-weight: bold;
+      }
+      .watch-btn {
+        background: #28a745;
+      }
+      .remove-btn {
+        background: #dc3545;
+      }
+
+      /* THE MAGIC CSS CLASS (You will toggle this with JavaScript!) */
+      .watched-movie {
+        text-decoration: line-through;
+        opacity: 0.5;
+        color: white;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <h2>My Watchlist</h2>
+
+      <div class="inputs">
+        <input
+          type="text"
+          id="movie-input"
+          placeholder="Enter a movie title..."
+        />
+        <button id="add-btn">Add Movie</button>
+      </div>
+
+      <div id="movie-list"></div>
+    </div>
+
+    <script>
+      const inputMovie = document.getElementById("movie-input");
+      const btn = document.getElementById("add-btn");
+      const movieList= document.getElementById('movie-list');
+      btn.addEventListener('click', function () {
+       if(inputMovie.value !== ""){
+         let movieDiv = document.createElement("div");
+         movieDiv.className="movie-item";
+        movieDiv.innerHTML = `<ul>
+        <li>Movie:${inputMovie.value} <button class="watched"> watched</button>
+      <button class="remove">Remove</button></li>
+      </ul>`;
+      movieList.appendChild(movieDiv);
+      const remove = movieDiv.querySelector('.remove');
+      remove.addEventListener('click', function (){
+        movieDiv.remove();
+      });
+      const watched = movieDiv.querySelector('.watched');
+      watched.addEventListener('click', function(){
+        movieDiv.classList.toggle("watched-movie");
+      })
+
+       }else{
+
+       }
+      });
+    </script>
+  </body>
+</html>

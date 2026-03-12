@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+      }
+      .cart-container {
+        border: 2px solid #333;
+        padding: 20px;
+        width: 350px;
+        border-radius: 10px;
+        background: #f9f9f9;
+      }
+      .inputs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 5px;
+      }
+      #item-name {
+        width: 60%;
+      }
+      #item-price {
+        width: 30%;
+      }
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+      }
+      .total-section {
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: right;
+        color: green;
+      }
+      .remove-btn {
+        background: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+    </style>
+    <title>Shopping Cart</title>
+  </head>
+  <body>
+    <div class="cart-container">
+      <h2>Shopping Cart</h2>
+
+      <div class="inputs">
+        <input type="text" id="item-name" placeholder="Item Name" />
+        <input type="number" id="item-price" placeholder="Price" />
+      </div>
+      <button
+        id="add-btn"
+        style="width: 100%; padding: 10px; margin-bottom: 20px"
+      >
+        Add to Cart
+      </button>
+
+      <div id="cart-list"></div>
+
+      <div class="total-section">Total: $ <span id="grand-total"></span></div>
+    </div>
+
+    <script>
+      let currentTotal = 0;
+      const itemName = document.getElementById("item-name");
+
+      const cartList = document.getElementById("cart-list");
+
+      const price = document.getElementById("item-price");
+      const cartBtn = document.getElementById("add-btn");
+
+      cartBtn.addEventListener("click", function () {
+        if(itemName.value !== "" && price.value !== ""){
+        priceValue = parseInt(price.value);
+        currentTotal = priceValue + currentTotal;
+
+        const list = document.createElement("div");
+        list.innerHTML = `<ul>
+    <li> item: ${itemName.value} | Price: ${priceValue} <button class= "remove"> Delete</button></li>
+  </ul>`;
+        cartList.appendChild(list);
+
+        const remove = list.querySelector(".remove");
+        remove.addEventListener("click", function () {
+          list.remove();
+          currentTotal = currentTotal - priceValue;
+          total.innerText = currentTotal;
+        });
+        const total = document.getElementById("grand-total");
+        total.innerText = currentTotal;
+      }else{
+        alert(' fill in everything')
+      }
+      });
+    </script>
+  </body>
+</html>

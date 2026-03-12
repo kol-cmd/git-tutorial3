@@ -1,21 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <form action="post">
-    <h1>To do List</h1>
-    <p></p>
-    <input type="text" placeholder="activity">
-<button action="submit"> Add task</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #listSection {
+        height: 200px;
+        width: 500px;
+        background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #text-box {
+        width: 300px;
+        height: 50px;
+      }
+      .listArea {
+        height: 300px;
+        width: 500px;
+        border: 3px solid;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="listSection">
+      <input id="text-box" type="text" placeholder="Activity" required />
+      <p></p>
+      <label for="start">Deadline</label>
+      <input
+        type="date"
+        id="start"
+        name="trip-start"
+        value="2026-03-11"
+        min="2026-03-11"
+        max="2028-12-30"
+        required
+      />
+      <button id="submit">Add Task</button>
+    </div>
 
+    <h2>To do</h2>
+    <div class="listArea" id="MyList"></div>
+    <script>
+      const inputText = document.getElementById("text-box");
+      const Deadline = document.getElementById("start");
+      const Btn = document.getElementById("submit");
+      const textArea = document.getElementById("MyList");
 
-  </form>
-  <script>
+    Btn.addEventListener('click', function(){
+      let newtask = document.createElement("div");
+      newtask.innerHTML = `<ul>
+  <li class="item"> ${inputText.value}| Deadline: ${Deadline.value} <button class= "remove">Delete</button></li>
+</ul>`;
+textArea.appendChild(newtask);
+const remove= newtask.querySelector('.remove');
 
-  </script>
-</body>
+remove.addEventListener('click', function(){
+  newtask.remove();
+})
+    })
+    </script>
+  </body>
 </html>
